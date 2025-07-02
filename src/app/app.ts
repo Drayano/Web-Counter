@@ -37,7 +37,9 @@ import { trigger, transition, style, animate } from '@angular/animations';
           <span class="material-icons">restart_alt</span>
         </button>
 
-        <div class="score" [@bounce]="bounceKey()">{{ percentage() }}%</div>
+        <div class="score" [@bounce]="bounceKey()">
+          {{ displayedPercentage() }}%
+        </div>
       </header>
 
       <main>
@@ -141,14 +143,14 @@ export class App implements AfterViewInit {
   private counter = inject(Counter);
   private destroyRef = inject(DestroyRef);
 
-  readonly percentage = this.counter.percentage;
-
   private bounce = signal(0);
   bounceKey = computed(() => this.bounce());
 
-  // Orientation signal for layout
   private portrait = signal(window.innerHeight > window.innerWidth);
   isPortrait = computed(() => this.portrait());
+
+  // Track the displayed percentage
+  displayedPercentage = signal(this.counter.percentage());
 
   ngAfterViewInit() {
     const resizeObserver = new ResizeObserver(() => {
@@ -160,15 +162,21 @@ export class App implements AfterViewInit {
 
   onCorrect() {
     this.counter.incrementCorrect();
-    this.bounce.update((v) => v + 1);
+    this.updateDisplay();
   }
 
   onWrong() {
     this.counter.incrementWrong();
-    this.bounce.update((v) => v + 1);
+    this.updateDisplay();
   }
 
   onReset() {
     this.counter.reset();
+    this.updateDisplay();
+  }
+
+  private updateDisplay() {
+    this.displayedPercentage.set(this.counter.percentage());
+    this.bounce.update((v) => v + 1); // trigger bounce animation
   }
 }
