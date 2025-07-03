@@ -16,9 +16,17 @@
 
     <div class="score-container" [@bounce]="bounceKey()">
       <div class="score">{{ displayedPercentage() }}%</div>
+
       <div class="counts">
-        <span class="correct-count">✅ {{ correctCount() }}</span>
-        <span class="wrong-count">❌ {{ wrongCount() }}</span>
+        <span class="count correct-count">
+          <mat-icon>check</mat-icon>
+          <span>{{ correctCount() }}</span>
+        </span>
+
+        <span class="count wrong-count">
+          <mat-icon>close</mat-icon>
+          <span>{{ wrongCount() }}</span>
+        </span>
       </div>
     </div>
   </header>
@@ -27,6 +35,7 @@
     <button mat-fab color="primary" class="correct" (click)="onCorrect()">
       <mat-icon>check</mat-icon>
     </button>
+
     <button mat-fab color="warn" class="wrong" (click)="onWrong()">
       <mat-icon>close</mat-icon>
     </button>

@@ -27,19 +27,32 @@ header {
 }
 
 .counts {
-  font-size: 0.9rem;
-  margin-top: 0.2rem;
   display: flex;
-  justify-content: end;
-  gap: 0.5rem;
-}
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5rem;
 
-.correct-count {
-  color: #388e3c;
-}
+  .count {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
 
-.wrong-count {
-  color: #d32f2f;
+  .correct-count {
+    color: #4caf50;
+  }
+
+  .wrong-count {
+    color: #f44336;
+  }
+
+  mat-icon {
+    font-size: 1.5rem;
+    vertical-align: middle;
+  }
 }
 
 main {
