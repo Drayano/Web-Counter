@@ -1,4 +1,4 @@
-import { Injectable, signal, computed, effect } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 
 function getLocalNumber(key: string): number {
   const value = localStorage.getItem(key);
@@ -7,8 +7,8 @@ function getLocalNumber(key: string): number {
 
 @Injectable({ providedIn: 'root' })
 export class Counter {
-  private correctCount = signal<number>(getLocalNumber('correct'));
-  private wrongCount = signal<number>(getLocalNumber('wrong'));
+  readonly correctCount = signal<number>(getLocalNumber('correct'));
+  readonly wrongCount = signal<number>(getLocalNumber('wrong'));
 
   getCorrect = () => this.correctCount();
   getWrong = () => this.wrongCount();

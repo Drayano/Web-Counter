@@ -6,7 +6,7 @@ import {
   AfterViewInit,
   DestroyRef,
 } from '@angular/core';
-import { NgIf, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Counter } from './counter';
@@ -16,7 +16,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NgIf, NgClass, MatButtonModule, MatIconModule, ConfirmDialog],
+  imports: [NgClass, MatButtonModule, MatIconModule, ConfirmDialog],
   animations: [
     trigger('bounce', [
       transition('* => *', [
@@ -29,13 +29,13 @@ import { trigger, transition, style, animate } from '@angular/animations';
   styleUrls: ['./app.scss'],
 })
 export class App implements AfterViewInit {
-  private counter = inject(Counter);
-  private destroyRef = inject(DestroyRef);
+  readonly counter = inject(Counter);
+  readonly destroyRef = inject(DestroyRef);
 
-  private bounce = signal(0);
+  readonly bounce = signal(0);
   bounceKey = computed(() => this.bounce());
 
-  private portrait = signal(window.innerHeight > window.innerWidth);
+  readonly portrait = signal(window.innerHeight > window.innerWidth);
   isPortrait = computed(() => this.portrait());
 
   displayedPercentage = signal(this.counter.percentage());
