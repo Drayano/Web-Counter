@@ -29,7 +29,10 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"]
+            "styles": [
+              "@angular/material/prebuilt-themes/rose-red.css",
+              "src/styles.scss"
+            ]
           },
           "configurations": {
             "production": {
@@ -45,7 +48,8 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "serviceWorker": "ngsw-config.json"
             },
             "development": {
               "optimization": false,
@@ -81,7 +85,10 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"]
+            "styles": [
+              "@angular/material/prebuilt-themes/rose-red.css",
+              "src/styles.scss"
+            ]
           }
         }
       }

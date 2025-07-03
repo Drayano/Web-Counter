@@ -1,41 +1,43 @@
 import { Injectable, signal, computed, effect } from '@angular/core';
 
+function getLocalNumber(key: string): number {
+  const value = localStorage.getItem(key);
+  return value !== null ? +value : 0;
+}
+
 @Injectable({ providedIn: 'root' })
 export class Counter {
-  private correct = signal(this.load('correct'));
-  private wrong = signal(this.load('wrong'));
+  private correctCount = signal<number>(getLocalNumber('correct'));
+  private wrongCount = signal<number>(getLocalNumber('wrong'));
 
-  readonly correctCount = this.correct.asReadonly();
-  readonly wrongCount = this.wrong.asReadonly();
+  getCorrect = () => this.correctCount();
+  getWrong = () => this.wrongCount();
 
-  readonly percentage = computed(() => {
-    const total = this.correct() + this.wrong();
-    return total === 0 ? 0 : Math.round((this.correct() / total) * 100);
+  percentage = computed(() => {
+    const total = this.correctCount() + this.wrongCount();
+    return total ? Math.round((this.correctCount() / total) * 100) : 0;
   });
 
-  constructor() {
-    effect(() => this.save('correct', this.correct()));
-    effect(() => this.save('wrong', this.wrong()));
-  }
-
   incrementCorrect() {
-    this.correct.update((c) => c + 1);
+    this.correctCount.update((v) => {
+      const updated = v + 1;
+      localStorage.setItem('correct', updated.toString());
+      return updated;
+    });
   }
 
   incrementWrong() {
-    this.wrong.update((c) => c + 1);
+    this.wrongCount.update((v) => {
+      const updated = v + 1;
+      localStorage.setItem('wrong', updated.toString());
+      return updated;
+    });
   }
 
   reset() {
-    this.correct.set(0);
-    this.wrong.set(0);
-  }
-
-  private save(key: string, value: number) {
-    localStorage.setItem(key, value.toString());
-  }
-
-  private load(key: string): number {
-    return parseInt(localStorage.getItem(key) ?? '0', 10);
+    localStorage.removeItem('correct');
+    localStorage.removeItem('wrong');
+    this.correctCount.set(0);
+    this.wrongCount.set(0);
   }
 }

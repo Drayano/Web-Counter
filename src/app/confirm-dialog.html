@@ -1,0 +1,9 @@
+<div class="overlay" *ngIf="visible">
+  <div class="dialog">
+    <p>Are you sure you want to reset?</p>
+    <div class="actions">
+      <button mat-flat-button color="primary" (click)="confirm()">Yes</button>
+      <button mat-stroked-button color="warn" (click)="cancel()">No</button>
+    </div>
+  </div>
+</div>

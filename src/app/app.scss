@@ -1,0 +1,66 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  width: 100%;
+  background: #f5f5f5;
+  font-family: Roboto, sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.score-container {
+  text-align: right;
+}
+
+.score {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.counts {
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+  display: flex;
+  justify-content: end;
+  gap: 0.5rem;
+}
+
+.correct-count {
+  color: #388e3c;
+}
+
+.wrong-count {
+  color: #d32f2f;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.portrait main {
+  flex-direction: column;
+}
+
+.landscape main {
+  flex-direction: row;
+}
+
+button.correct,
+button.wrong {
+  width: clamp(80px, 25vw, 140px);
+  height: clamp(80px, 25vw, 140px);
+}
