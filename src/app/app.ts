@@ -9,7 +9,7 @@ import {
 import { NgClass } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Counter } from './counter';
+import { Counter } from './services/counter';
 import { ConfirmDialog } from './confirm-dialog/confirm-dialog';
 import { trigger, transition, style, animate } from '@angular/animations';
 
