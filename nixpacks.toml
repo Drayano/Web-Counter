@@ -5,7 +5,4 @@ nixPkgs = ["nodejs_23"]
 cmds = ["npm ci"]
 
 [phases.build]
-cmds = ["npm run build -- --output-path=dist"]
-
-[phases.start]
-cmds = ["npx serve -s dist"]
+cmds = ["npm run build"]
